@@ -1,0 +1,1 @@
+let e=" yes yes",o=e=>" long functions too",t={o:e,t:o()};alert("test works"+t.o+t.t);

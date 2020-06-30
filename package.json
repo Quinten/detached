@@ -4,7 +4,7 @@
   "description": "js1024.1",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node watch.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Quinten/js1024.1/issues"
   },
-  "homepage": "https://github.com/Quinten/js1024.1#readme"
+  "homepage": "https://github.com/Quinten/js1024.1#readme",
+  "devDependencies": {
+    "terser": "^4.8.0"
+  }
 }
