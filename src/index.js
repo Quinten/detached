@@ -8,10 +8,7 @@ let sprite = ({
     return {x: (_ = x) => x = _ , y, draw};
 };
 let player = sprite({x : innerWidth / 2, y: innerHeight / 2});
-let {x, y} = player;
-console.log(x);
-//x.e = 8;
-//console.log(x);
+alert('hacked the eval of the shim');
 setInterval(() => {
     player.x(player.x() + 1);
     player.draw();

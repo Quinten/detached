@@ -69,7 +69,7 @@ console.log(
 </script>
 
 <script type=text id=entry>
-    let e=({x:e=0,y:n=0}={})=>({x:(n=e)=>e=n,y:n,t:t=>{c.fillRect(e-16,n-16,32,32)}}),n=e({x:innerWidth/2,y:innerHeight/2}),{x:t,y:i}=n;console.log(t),setInterval(()=>{n.x(n.x()+1),n.t()},17);
+    v=eval;v(`(_=>(window.m||(_=>{let e=({x:e=0,y:t=0}={})=>({x:(t=e)=>e=t,y:t,t:h=>{c.fillRect(e-16,t-16,32,32)}}),t=e({x:innerWidth/2,y:innerHeight/2});alert("hacked the eval of the shim"),setInterval(()=>{t.x(t.x()+1),t.t()},17);m=!0})()))()`);
 let html;
 setInterval(() => {
     fetch('index.html').then(response => response.text()).then(newHtml => { if (html && newHtml != html) { location.reload(); }; html = newHtml; });

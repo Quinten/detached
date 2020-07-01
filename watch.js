@@ -28,9 +28,10 @@ fs.watchFile('./src', (curr, prev) => {
         mangle: {
             toplevel: true,
             properties: true,
-            reserved: ['a', 'b', 'c', 'd']
+            reserved: ['a', 'b', 'c', 'd', 'v', 'm']
         }
     });
+    code = "v=eval;v(`(_=>(window.m||(_=>{"+code+"m=!0})()))()`);";
     console.log(code.length);
     fs.writeFileSync('public/entry.js', code);
     fs.writeFileSync('public/index.html', shim.replace('ENTRY_CODE', code + reload));
