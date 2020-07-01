@@ -1,1 +1,1 @@
-let e=" yes yes",o=e=>" long functions too",t={o:e,t:o()};alert("test works"+t.o+t.t);
+let e=({x:e=0,y:t=0}={})=>({set x(t){e=t},get x(){return e},y:t,t:n=>{c.fillRect(e-16,t-16,32,32)}}),t=e({x:innerWidth/2,y:innerHeight/2}),{x:n,y:r}=t;console.log(n),setInterval(()=>{t.x++,t.t()},17);
