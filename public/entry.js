@@ -1,1 +1,1 @@
-let e=({x:e=0,y:t=0}={})=>({set x(t){e=t},get x(){return e},y:t,t:n=>{c.fillRect(e-16,t-16,32,32)}}),t=e({x:innerWidth/2,y:innerHeight/2}),{x:n,y:r}=t;console.log(n),setInterval(()=>{t.x++,t.t()},17);
+let e=({x:e=0,y:n=0}={})=>({x:(n=e)=>e=n,y:n,t:t=>{c.fillRect(e-16,n-16,32,32)}}),n=e({x:innerWidth/2,y:innerHeight/2}),{x:t,y:i}=n;console.log(t),setInterval(()=>{n.x(n.x()+1),n.t()},17);

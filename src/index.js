@@ -5,12 +5,14 @@ let sprite = ({
     let draw = _ => {
         c.fillRect(x - 16, y - 16, 32, 32);
     };
-    return {set x(_x){x=_x}, get x(){return x}, y, draw};
+    return {x: (_ = x) => x = _ , y, draw};
 };
 let player = sprite({x : innerWidth / 2, y: innerHeight / 2});
 let {x, y} = player;
 console.log(x);
+//x.e = 8;
+//console.log(x);
 setInterval(() => {
-    player.x++;
+    player.x(player.x() + 1);
     player.draw();
 }, 17);
