@@ -24,6 +24,7 @@ fs.watchFile('./src', (curr, prev) => {
     files.forEach((filename) => {
         origCode += fs.readFileSync('src/' + filename, 'utf8');
     });
+    /*
     let {code} = Terser.minify(origCode, {
         mangle: {
             toplevel: true,
@@ -31,7 +32,10 @@ fs.watchFile('./src', (curr, prev) => {
             reserved: ['a', 'b', 'c', 'd', 'v', 'm']
         }
     });
-    code = "v=eval;v(`(_=>(window.m||(_=>{"+code+"m=!0})()))()`);";
+    */
+    let code = origCode.replace(/\n/g, '');
+    code = '"'+ code +'".replace(/([a-z]+)<{([^~]+?)}>/g, "let $1 = () => { $2 };")';
+    code = "v=eval;v(`(_=>(window.m||(_=>{v("+code+");m=!0})()))()`);";
     console.log(code.length);
     fs.writeFileSync('public/entry.js', code);
     fs.writeFileSync('public/index.html', shim.replace('ENTRY_CODE', code + reload));

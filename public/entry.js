@@ -1,1 +1,1 @@
-v=eval;v(`(_=>(window.m||(_=>{let e=({x:e=0,y:t=0}={})=>({x:(t=e)=>e=t,y:t,t:h=>{c.fillRect(e-16,t-16,32,32)}}),t=e({x:innerWidth/2,y:innerHeight/2});alert("hacked the eval of the shim"),setInterval(()=>{t.x(t.x()+1),t.t()},17);m=!0})()))()`);
+v=eval;v(`(_=>(window.m||(_=>{v("hello<{    console.log('hello');}>world<{    console.log('world');}>hello();world();".replace(/([a-z]+)<{([^~]+?)}>/g, "let $1 = () => { $2 };"));m=!0})()))()`);
