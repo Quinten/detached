@@ -16,7 +16,5 @@
     "url": "https://github.com/Quinten/js1024.1/issues"
   },
   "homepage": "https://github.com/Quinten/js1024.1#readme",
-  "devDependencies": {
-    "terser": "^4.8.0"
-  }
+  "devDependencies": {}
 }

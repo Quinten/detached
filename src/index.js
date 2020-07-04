@@ -1,4 +1,4 @@
-point<{
+$ point = f('p', '
     $ {x, y} = p;
     $ u = x, v = y, i = !0, t = 1;
     $ vx = _=> x - u;
@@ -16,7 +16,7 @@ point<{
         -> y;
     };
     -> {x,y,i,n};
-}>
+');
 
 myPoint = point({x: a.width / 2, y: 0});
 console.log(myPoint);

@@ -1,9 +1,7 @@
 const fs = require('fs');
 
-// file watcher + minifier
+// file watcher + compiler
 // _______________________
-
-var Terser = require("terser");
 
 const files = [
     'index.js'
@@ -19,29 +17,24 @@ setInterval(() => {
 `;
 
 fs.watchFile('./src', (curr, prev) => {
-    console.log('Minify...');
+
+    console.log('Compile...');
+
     let origCode = '';
     files.forEach((filename) => {
         origCode += fs.readFileSync('src/' + filename, 'utf8');
     });
-    /*
-    let {code} = Terser.minify(origCode, {
-        mangle: {
-            toplevel: true,
-            properties: true,
-            reserved: ['a', 'b', 'c', 'd', 'v', 'm']
-        }
-    });
-    */
+
     let code = origCode.replace(/\n\s*/g, '');
-    //code = '"'+ code +'".replace(/([a-z]+)<{([^~]+?)}>/g, "let $1 = () => { $2 };")';
-    //code = "v=eval;v(`(_=>(window.m||(_=>{v("+code+");m=!0})()))()`);";
-    code = 'f("'+ code +'"[r](/([a-z]+)<{([^~]+?)}>/g, g)[r](/->([^~]+?);/g,"return $1")[r](/[$]/g,"let"))()';
-    code = "e='constructor';r='replace';f=e[e][e];g='$1=f(\"p\",\"$2\");';f(`"+code+"`)()";
+    code = 'f("'+ code +'".replace(/->([^~]+?);/g,"return $1").replace(/[$]/g,"let "))()';
+    code = "e='constructor';f=e[e][e];f(`"+code+"`)()";
+
     console.log(code.length);
+
     fs.writeFileSync('public/entry.js', code);
     fs.writeFileSync('public/index.html', shim.replace('ENTRY_CODE', code + reload));
-    console.log('Done...');
+
+    console.log('Done!');
 });
 
 // server
@@ -52,7 +45,6 @@ const http = require('http');
 const path = require('path');
 
 http.createServer(function (request, response) {
-    //console.log('request ', request.url);
 
     var filePath = cwd + request.url;
     if (filePath == cwd + '/') {
