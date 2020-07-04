@@ -33,7 +33,7 @@ fs.watchFile('./src', (curr, prev) => {
         }
     });
     */
-    let code = origCode.replace(/\n/g, '');
+    let code = origCode.replace(/\n\s*/g, '');
     //code = '"'+ code +'".replace(/([a-z]+)<{([^~]+?)}>/g, "let $1 = () => { $2 };")';
     //code = "v=eval;v(`(_=>(window.m||(_=>{v("+code+");m=!0})()))()`);";
     code = 'f("'+ code +'"[r](/([a-z]+)<{([^~]+?)}>/g, g)[r](/->([^~]+?);/g,"return $1")[r](/[$]/g,"let"))()';
