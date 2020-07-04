@@ -1,10 +1,19 @@
 hello<{
-    console.log('hello');
+
+$ {greet}=p;
+$ {yololo='yoloyolo'}=p;
+console.log(greet);
+greet='that was it';
+->{greet,yololo};
+
 }>
+
 
 world<{
-    console.log('world');
+
+console.log('constructor');
+
 }>
 
-hello();
+console.log(hello({greet: 'howdy'}));
 world();
