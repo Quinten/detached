@@ -25,7 +25,7 @@ fs.watchFile('./src', (curr, prev) => {
         origCode += fs.readFileSync('src/' + filename, 'utf8');
     });
 
-    let code = origCode.replace(/\n\s*/g, '');
+    let code = origCode.replace(/(?<![$])\s|\s(?!{)/g, '');
     code = 'f("'+ code +'".replace(/->([^~]+?);/g,"return $1").replace(/[$]/g,"let "))()';
     code = "e='constructor';f=e[e][e];f(`"+code+"`)()";
 

@@ -1,5 +1,5 @@
-$point=p=>{
-    $ u = p.x, v = p.y, g = 1;
+point=p=>{
+    $ u = p.x, v = p.y, g = .3;
     p.f = !0;
     p.n = _=> {
         if (p.f) {
@@ -10,35 +10,42 @@ $point=p=>{
             u = x;
             v = y;
         }
-        c.fillRect(p.x,p.y,12,12);
     };
     -> p;
 };
 
-$stick=s=>{
+stick=s=>{
     $ {a,b} = s;
-    $ dx = b.x - a.y;
-    $ dy = b.y - a.y;
-    $ g = Math.sqrt(dx * dx + dy * dy);
+    $ u = b.x - a.y;
+    $ v = b.y - a.y;
+    $ g = Math.sqrt(u * u + v * v);
     s.n = _=> {
-        dx = b.x - a.x;
-        dy = b.y - a.y;
-        $ h = Math.sqrt(dx * dx + dy * dy);
+        u = b.x - a.x;
+        v = b.y - a.y;
+        $ h = Math.sqrt(u * u + v * v);
         $ d = g - h;
-        $ ox = (d * dx / h) / 2;
-        $ oy = (d * dy / h) / 2;
+        $ p = d * u / h;
+        $ q = d * v / h;
         if (a.f && b.f) {
-            a.x -= ox;
-            a.y -= oy;
-            b.x += ox;
-            b.y += oy;
-        } else if (a.f && !b.f) {
-            a.x -= ox * 2;
-            a.y -= oy * 2;
-        } else if (!a.f && b.f) {
-            b.x += ox * 2;
-            b.y += oy * 2;
+            a.x -= p/2;
+            a.y -= q/2;
+            b.x += p/2;
+            b.y += q/2;
+            -> 0;
         }
+        if (a.f && !b.f) {
+            a.x -= p;
+            a.y -= q;
+            -> 0;
+        }
+        if (!a.f && b.f) {
+            b.x += p;
+            b.y += q;
+        }
+    };
+    s.d = _=> {
+        c.moveTo(a.x, a.y);
+        c.lineTo(b.x, b.y);
     };
     -> s;
 };
@@ -47,10 +54,13 @@ pA = point({x: 100, y: 100});
 pB = point({x: 200, y: 200});
 pB.f = !1;
 sA = stick({a: pA, b: pB});
-(m=_=>{
+(r=_=>{
     c.clearRect(0, 0, a.width, a.height);
     pA.n();
     pB.n();
+    c.beginPath();
     sA.n();
-    requestAnimationFrame(m);
+    sA.d();
+    c.stroke();
+    requestAnimationFrame(r);
 })()
