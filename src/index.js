@@ -1,8 +1,15 @@
-point=p=>{
-    $ u = p.x, v = p.y, g = .3;
-    p.f = !0;
-    p.n = _=> {
-        if (p.f) {
+w=[];
+k=[];
+n=[];
+m=Math;
+z=a.width;
+j=a.height;
+
+P=p=>{
+    $ u = p.x, v = p.y, g = .3, d = 2e3 + m.random() * 8e3;
+    p.f = !1;
+    n.push(t=> {
+        if (p.f = t > d) {
             p.y += g;
             $ {x,y} = p;
             p.x += p.x - u;
@@ -10,22 +17,16 @@ point=p=>{
             u = x;
             v = y;
         }
-    };
+    });
     -> p;
 };
 
-stick=s=>{
-    $ {a,b} = s;
-    $ u = b.x - a.y;
-    $ v = b.y - a.y;
-    $ g = Math.sqrt(u * u + v * v);
-    s.n = _=> {
+S=s=>{
+    $ {a,b} = s, u = b.x - a.x, v = b.y - a.y, g = m.sqrt(u * u + v * v);
+    k.push(_=> {
         u = b.x - a.x;
         v = b.y - a.y;
-        $ h = Math.sqrt(u * u + v * v);
-        $ d = g - h;
-        $ p = d * u / h;
-        $ q = d * v / h;
+        $ h = m.sqrt(u * u + v * v), d = g - h, p = d * u / h, q = d * v / h;
         if (a.f && b.f) {
             a.x -= p/2;
             a.y -= q/2;
@@ -42,25 +43,40 @@ stick=s=>{
             b.x += p;
             b.y += q;
         }
-    };
-    s.d = _=> {
+    });
+    w.push(_=> {
         c.moveTo(a.x, a.y);
         c.lineTo(b.x, b.y);
-    };
+    });
     -> s;
 };
 
-pA = point({x: 100, y: 100});
-pB = point({x: 200, y: 200});
-pB.f = !1;
-sA = stick({a: pA, b: pB});
-(r=_=>{
-    c.clearRect(0, 0, a.width, a.height);
-    pA.n();
-    pB.n();
+C=f('
+    $ g = [...arguments], s, p;
+    g.forEach(n=>{
+        $ a = p;
+        $ b = P({
+            x: z / 2 - 150 + 20 * (n % 15),
+            y: j / 2 - 150 + 20 * m.floor(n / 15)
+        });
+        if (!s) {
+            s = p = b;
+            -> 0;
+        }
+        S({a,b});
+        p = b;
+    });
+    S({a: p, b: s});
+');
+
+C(5,7,97,93,63,64,79,81,21,20);
+
+(r=t=>{
+    c.clearRect(0, 0, z, j);
     c.beginPath();
-    sA.n();
-    sA.d();
+    n.forEach(_=>_(t));
+    k.forEach(_=>_());
+    w.forEach(_=>_());
     c.stroke();
     requestAnimationFrame(r);
-})()
+})(0)
