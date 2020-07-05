@@ -1,4 +1,5 @@
 const fs = require('fs');
+let Terser = require('terser');
 
 // file watcher + compiler
 // _______________________
@@ -18,16 +19,20 @@ setInterval(() => {
 
 fs.watchFile('./src', (curr, prev) => {
 
-    console.log('Compile...');
+    console.log('Minify...');
 
     let origCode = '';
     files.forEach((filename) => {
         origCode += fs.readFileSync('src/' + filename, 'utf8');
     });
 
-    let code = origCode.replace(/(?<![$])\s|\s(?!{)/g, '');
-    code = 'f("'+ code +'".replace(/->([^~]+?);/g,"return $1").replace(/[$]/g,"let "))()';
-    code = "e='constructor';f=e[e][e];f(`"+code+"`)()";
+    let {code} = Terser.minify(origCode, {
+        mangle: {
+            toplevel: true,
+            properties: true,
+            reserved: ['a', 'b', 'c', 'd']
+        }
+    });
 
     console.log(code.length);
 
