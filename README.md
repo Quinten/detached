@@ -1,2 +1,2 @@
-# js1024.1
-js1024.1
+# detached
+a logo that is falling apart
