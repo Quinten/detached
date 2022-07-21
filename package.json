@@ -18,6 +18,6 @@
   "homepage": "https://github.com/Quinten/detached#readme",
   "devDependencies": {},
   "dependencies": {
-    "terser": "^4.8.0"
+    "terser": "^4.8.1"
   }
 }
